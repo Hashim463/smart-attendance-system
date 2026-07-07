@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}My Attendance{% endblock %}
+{% block content %}
+<h2 style="margin-bottom:20px;">Welcome, {{ session.get('student_name') }}</h2>
+
+<div class="stats-row">
+    <div class="stat-box">
+        <div class="value">{{ total_days }}</div>
+        <div class="label">Days Marked</div>
+    </div>
+    <div class="stat-box">
+        <div class="value">{{ percentage }}%</div>
+        <div class="label">Attendance Rate</div>
+    </div>
+</div>
+
+<div class="card">
+    <h3 style="margin-bottom:14px;">Attendance History</h3>
+    <table>
+        <tr><th>Date</th><th>Time In</th><th>Status</th></tr>
+        {% for r in records %}
+        <tr>
+            <td>{{ r.date }}</td>
+            <td>{{ r.time_in }}</td>
+            <td class="status-{{ r.status }}">{{ r.status }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3">No attendance recorded yet.</td></tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Home - Smart Attendance System{% endblock %}
+{% block content %}
+<div class="hero card">
+    <h1>Smart Attendance System</h1>
+    <p>Face-recognition based attendance tracking for students and admins.</p>
+    <a href="{{ url_for('student_login') }}" class="btn">Student Login</a>
+    <a href="{{ url_for('admin_login') }}" class="btn btn-secondary">Admin Login</a>
+</div>
+{% endblock %}

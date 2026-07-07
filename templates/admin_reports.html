@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Attendance Reports{% endblock %}
+{% block content %}
+<h2 style="margin-bottom:20px;">Attendance Reports</h2>
+
+<form method="GET" class="filters">
+    <div>
+        <label>From</label>
+        <input type="date" name="date_from" value="{{ date_from or '' }}">
+    </div>
+    <div>
+        <label>To</label>
+        <input type="date" name="date_to" value="{{ date_to or '' }}">
+    </div>
+    <button type="submit" class="btn">Filter</button>
+    <a class="btn btn-secondary"
+       href="{{ url_for('admin_export', date_from=date_from, date_to=date_to) }}">
+       ⬇ Export to Excel
+    </a>
+</form>
+
+<div class="card">
+    <table>
+        <tr><th>Roll No</th><th>Name</th><th>Date</th><th>Time</th><th>Status</th></tr>
+        {% for r in records %}
+        <tr>
+            <td>{{ r.roll_no }}</td>
+            <td>{{ r.name }}</td>
+            <td>{{ r.date }}</td>
+            <td>{{ r.time_in }}</td>
+            <td class="status-{{ r.status }}">{{ r.status }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No records found for this range.</td></tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

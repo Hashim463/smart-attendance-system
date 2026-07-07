@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Smart Attendance System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="brand">📸 Smart Attendance</a>
+        <div class="nav-links">
+            {% if session.get('admin_id') %}
+                <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('admin_students') }}">Students</a>
+                <a href="{{ url_for('admin_reports') }}">Reports</a>
+                <a href="{{ url_for('admin_logout') }}">Logout ({{ session.get('admin_username') }})</a>
+            {% elif session.get('student_id') %}
+                <a href="{{ url_for('student_dashboard') }}">My Attendance</a>
+                <a href="{{ url_for('student_logout') }}">Logout ({{ session.get('student_name') }})</a>
+            {% else %}
+                <a href="{{ url_for('student_login') }}">Student Login</a>
+                <a href="{{ url_for('admin_login') }}">Admin Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

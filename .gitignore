@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+encodings/encodings.pickle
+exports/*.xlsx
+.vscode/
+{templates,static,utils,encodings,exports}/

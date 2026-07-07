@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Admin Login{% endblock %}
+{% block content %}
+<div class="card" style="max-width:420px; margin:40px auto;">
+    <h2 style="margin-bottom:18px;">Admin Login</h2>
+    <form method="POST" class="stacked-form">
+        <div>
+            <label>Username</label>
+            <input type="text" name="username" required>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" name="password" required>
+        </div>
+        <button type="submit" class="btn">Log In</button>
+    </form>
+</div>
+{% endblock %}
